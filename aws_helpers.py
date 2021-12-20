@@ -1,7 +1,6 @@
 import boto3
 from time import sleep
 import pandas as pd
-import s3fs
 
 RESULTS_BUCKET = "dantelore.queryresults"
 
