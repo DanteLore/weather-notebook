@@ -51,7 +51,7 @@ def execute_athena_query(sql: str, timeout: int = 30):
             print('Query succeeded')
             return query_execution['QueryExecution']['ResultConfiguration']['OutputLocation']
 
-        print(f"Wait count {count}/{timeout}")
         sleep(1)
 
+    print(f"Query timed out after {timeout} attempts")
     return None
