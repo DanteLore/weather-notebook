@@ -1,27 +1,7 @@
 import boto3
 from time import sleep
-import pandas as pd
 
 RESULTS_BUCKET = "dantelore.queryresults"
-
-
-def read_file_from_s3(url):
-    print(f"Downloading data from: {url}")
-
-    s3 = boto3.client('s3')
-    response = s3.get_object(Bucket=RESULTS_BUCKET, Key=url)
-
-    return pd.read_csv(response.get('Body'))
-
-
-def write_file_to_s3(filename, s3_bucket, s3_key):
-    print("Uploading data to S3://{0}/{1}".format(s3_bucket, s3_key))
-
-    s3 = boto3.resource('s3')
-    s3.Bucket(s3_bucket).upload_file(
-        filename,
-        s3_key
-    )
 
 
 def execute_athena_query(sql: str, timeout: int = 30):
