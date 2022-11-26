@@ -27,8 +27,6 @@ def write_file_to_s3(filename, s3_bucket, s3_key):
 def execute_athena_query(sql: str, timeout: int = 30):
     athena = boto3.client('athena')
 
-    print("Executing: " + sql)
-
     query_start = athena.start_query_execution(
         QueryString=sql,
         QueryExecutionContext={
@@ -48,7 +46,6 @@ def execute_athena_query(sql: str, timeout: int = 30):
                 'StateChangeReason'))
             return None
         elif state == 'SUCCEEDED':
-            print('Query succeeded')
             return query_execution['QueryExecution']['ResultConfiguration']['OutputLocation']
 
         sleep(1)
